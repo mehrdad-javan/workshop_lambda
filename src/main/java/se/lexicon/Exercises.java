@@ -7,6 +7,7 @@ import se.lexicon.model.Person;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Comparator;
+import java.util.List;
 
 public class Exercises {
 
@@ -141,14 +142,21 @@ public class Exercises {
     }
 
     /*
-      13. Using findAndSort() find everyone sorted in following order: lastName > firstName > birthDate.
-     */
+  13. Using findAndSort() find everyone sorted in following order: lastName > firstName > birthDate.
+ */
     public static void exercise13(String message) {
         System.out.println(message);
-        Comparator<Person> byLastNameThenFirstNameThenBirthDate = Comparator.comparing(Person::getLastName)
-                .thenComparing(Person::getFirstName)
-                .thenComparing(Person::getBirthDate);
-        storage.findAndSort(byLastNameThenFirstNameThenBirthDate).forEach(System.out::println);
+        List<Person> sortedPersons = storage.findAndSort(
+                Comparator.comparing(Person::getLastName)
+                        .thenComparing(Person::getFirstName)
+                        .thenComparing(Person::getBirthDate)
+        );
+        if (sortedPersons != null) {
+            sortedPersons.forEach(System.out::println);
+        } else {
+            System.out.println("No persons found.");
+        }
         System.out.println("----------------------");
     }
+
 }
