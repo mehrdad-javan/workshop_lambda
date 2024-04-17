@@ -13,7 +13,7 @@ public class Exercises {
     private final static DataStorage storage = DataStorage.INSTANCE;
 
     /*
-       1.	Find everyone that has firstName: “Erik” using findMany().
+       1. Find everyone that has firstName: “Erik” using findMany().
     */
     public static void exercise1(String message) {
         System.out.println(message);
@@ -22,16 +22,16 @@ public class Exercises {
     }
 
     /*
-        2.	Find all females in the collection using findMany().
+        2. Find all females in the collection using findMany().
      */
     public static void exercise2(String message) {
         System.out.println(message);
-        storage.findMany(person -> person.getGender().equals(Gender.FEMALE)).forEach(System.out::println);
+        storage.findMany(person -> person.getGender() == Gender.FEMALE).forEach(System.out::println);
         System.out.println("----------------------");
     }
 
     /*
-        3.	Find all who are born after (and including) 2000-01-01 using findMany().
+        3. Find all who are born after (and including) 2000-01-01 using findMany().
      */
     public static void exercise3(String message) {
         System.out.println(message);
@@ -40,32 +40,30 @@ public class Exercises {
     }
 
     /*
-        4.	Find the Person that has an id of 123 using findOne().
+        4. Find the Person that has an id of 123 using findOne().
      */
     public static void exercise4(String message) {
         System.out.println(message);
         System.out.println(storage.findOne(p -> p.getId() == 123));
         System.out.println("----------------------");
-
     }
 
     /*
-        5.	Find the Person that has an id of 456 and convert to String with following content:
+        5. Find the Person that has an id of 456 and convert to String with following content:
             “Name: Nisse Nilsson born 1999-09-09”. Use findOneAndMapToString().
      */
     public static void exercise5(String message) {
         System.out.println(message);
-        System.out.println("----------------------");
-        System.out.println(
-                storage.findOneAndMapToString(
-                        person -> person.getId() == 456,
-                        person -> "Name: " + person.getFirstName() + " " + person.getLastName() + " born " + person.getBirthDate()
-                )
+        String result = storage.findOneAndMapToString(
+                person -> person.getId() == 456,
+                person -> "Name: " + person.getFirstName() + " " + person.getLastName() + " born " + person.getBirthDate()
         );
+        System.out.println(result != null ? result : "No person found with ID 456");
+        System.out.println("----------------------");
     }
 
     /*
-        6.	Find all male people whose names start with “E” and convert each to a String using findManyAndMapEachToString().
+        6. Find all male people whose names start with “E” and convert each to a String using findManyAndMapEachToString().
      */
     public static void exercise6(String message) {
         System.out.println(message);
@@ -77,7 +75,7 @@ public class Exercises {
     }
 
     /*
-        7.	Find all people who are below age of 10 and convert them to a String like this:
+        7. Find all people who are below age of 10 and convert them to a String like this:
             “Olle Svensson 9 years”. Use findManyAndMapEachToString() method.
      */
     public static void exercise7(String message) {
@@ -90,7 +88,7 @@ public class Exercises {
     }
 
     /*
-      8.	Using findAndDo() print out all people with firstName “Ulf”.
+      8. Using findAndDo() print out all people with firstName “Ulf”.
     */
     public static void exercise8(String message) {
         System.out.println(message);
@@ -99,7 +97,7 @@ public class Exercises {
     }
 
     /*
-      9.	Using findAndDo() print out everyone who have their lastName contain their firstName.
+      9. Using findAndDo() print out everyone who have their lastName contain their firstName.
      */
     public static void exercise9(String message) {
         System.out.println(message);
@@ -108,19 +106,22 @@ public class Exercises {
     }
 
     /*
-      10.	Using findAndDo() print out the firstName and lastName of everyone whose firstName is a palindrome.
+      10. Using findAndDo() print out the firstName and lastName of everyone whose firstName is a palindrome.
      */
     public static void exercise10(String message) {
         System.out.println(message);
-        storage.findAndDo(person -> {
-            String firstName = person.getFirstName().toLowerCase();
-            return firstName.equals(new StringBuilder(firstName).reverse().toString());
-        }, person -> System.out.println(person.getFirstName() + " " + person.getLastName()));
+        storage.findAndDo(
+                person -> {
+                    String firstName = person.getFirstName().toLowerCase();
+                    return firstName.equals(new StringBuilder(firstName).reverse().toString());
+                },
+                person -> System.out.println(person.getFirstName() + " " + person.getLastName())
+        );
         System.out.println("----------------------");
     }
 
     /*
-      11.	Using findAndSort() find everyone whose firstName starts with A sorted by birthdate.
+      11. Using findAndSort() find everyone whose firstName starts with A sorted by birthDate.
      */
     public static void exercise11(String message) {
         System.out.println(message);
@@ -130,7 +131,7 @@ public class Exercises {
     }
 
     /*
-      12.	Using findAndSort() find everyone born before 1950 sorted reversed by latest to earliest.
+      12. Using findAndSort() find everyone born before 1950 sorted reversed by latest to earliest.
      */
     public static void exercise12(String message) {
         System.out.println(message);
@@ -140,7 +141,7 @@ public class Exercises {
     }
 
     /*
-      13.	Using findAndSort() find everyone sorted in following order: lastName > firstName > birthDate.
+      13. Using findAndSort() find everyone sorted in following order: lastName > firstName > birthDate.
      */
     public static void exercise13(String message) {
         System.out.println(message);
@@ -151,5 +152,3 @@ public class Exercises {
         System.out.println("----------------------");
     }
 }
-
-
