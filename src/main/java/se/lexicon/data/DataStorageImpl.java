@@ -1,7 +1,6 @@
 package se.lexicon.data;
 
 
-
 import se.lexicon.model.Person;
 import se.lexicon.util.PersonGenerator;
 
